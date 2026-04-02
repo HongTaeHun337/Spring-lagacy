@@ -1,0 +1,17 @@
+package com.test.java.di02;
+
+public class Service {
+	
+	//부모클래스 <- (관계) -> 자식클래스
+	
+	//의존 주입
+	private Employee employee;
+	
+	public void doSomething() {
+		
+		
+		
+		
+	}
+	
+}

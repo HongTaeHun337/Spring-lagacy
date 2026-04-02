@@ -1,0 +1,15 @@
+package com.test.java.di03;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		//객체 생성 + 관리 + 소멸 > 스프링 역할 > 컨테이너
+		
+		Hong o1 = new Hong();
+		o1.work();
+		
+		
+	}
+	
+}

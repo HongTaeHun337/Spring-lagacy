@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<!-- memo.xml > 스프링 컨테이너 -->
+	<!-- 
+		스프링의 관리 대상이 되려면 > 스프링 빈이 되어야 한다.
+	 -->
+	 
+	 <!-- 주 업무 객체 역할 -->
+	 <bean class="com.test.java.aop.MemoImpl" id="memo"></bean>
+	 
+	 <!-- 보조 업무 객체 역할 -->
+	 <bean class="com.test.java.aop.Logger" id="logger"></bean>
+
+
+	<!--
+	 	AOP
+	 	1. 주 업무 객체 지정
+	 	2. 보조 업무 객체 지정
+	 -->
+	<aop:config>
+	
+		<!-- 보조 업무 객체 지정 -->
+		<aop:aspect ref="logger">
+		
+			<!-- 
+				보조 업무 객체가 주업무들 중 어느 업무에 개입
+				- PointCut 지정하기
+				
+				
+				
+			 -->
+		
+		</aop:aspect>
+	
+	</aop:config>
+	
+
+</beans>

@@ -1,0 +1,28 @@
+package com.test.java.di03;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		//Main.java
+		
+		//Main(사장) > Service(팀장) > Hong,Lee,Choi(팀원)
+		
+		
+		System.out.println("Main 자신의 업무");
+		
+		//Hong hong = new Hong();
+		//Lee lee = new Lee();
+		
+		Employee employee = new Hong();
+		
+		
+		
+		Service service = new Service(employee);//의존 주입(DI)
+		service.doSomething();
+		
+		System.out.println("Main 자신의 업무");
+		
+	}
+	
+}

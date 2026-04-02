@@ -1,0 +1,18 @@
+package com.test.java.aop;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		//Mian.java
+		/*
+		
+		  	AOP, Aspect Oriented Programming
+		  	- 관점 지향 프로그래밍
+		  	- 주업무 + 보조업무
+		  
+		*/
+		
+	}
+	
+}

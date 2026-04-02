@@ -1,0 +1,95 @@
+새 프로젝트
+- "BasicTest" > "com.test.java"
+
+
+STS3 + Spring MVC Project Templates
+- 구형 > 오래된 버전
+- Spring Framework > 5.0.7
+- JDK > 11
+
+
+
+Spring Framework 1.0 ~ 7.0
+- Spring 5.0 ~ 6.0
+
+
+Spring Framework > 5.x
+Spring Boot > 3.x + Spring Framework > 6.x
+
+
+
+
+
+메이븐, Maven
+- 프로젝트 관리 도구(이클립스 포함)
+- 프로젝트 생성 + 관리 + 배포 작업을 도와주는 프로그램
+- 관리 > 의존성 관리 > 프로젝트에 필요한 *.jar
+
+
+Spring MVC Project 구조
+
+BasicTest > pom.xml(Project Object Model, 메이븐 설정 파일)
+			- Lombok 설정
+
+main > 개발 자원
+src/main/java
+	- *.java 파일 보관
+src/main/resources
+	- 자바 이외의 파일들 보관
+
+test > 테스트용 자원 > 단위 테스트
+src/test/java
+src/test/resources
+
+src > main > webapp: 웹 루프 폴더
+
+JRE System Library > JDK(JRE)
+
+Maven Dependencies > 추가 라이브러리
+
+- webapp > resource : 이전의 asset 폴더 역할(js, css, images 등)
+
+- webapp > WEB-INF
+
+- webapp > WEB-INF > classes: *.class 저장
+  
+- webapp > WEB-INF > spring: 스프링 설정 폴더(********)
+
+- webapp > WEB-INF > spring > root-context.xml: 스프링 환경 설정 파일(전역)
+
+- webapp > WEB-INF > spring > appServlet > servlet-context.xml: 스프링 환경 설정 파일(지역)
+
+- webapp > WEB-INF > views 폴더(JSP 페이지)
+
+- webapp > WEB-INF > web.xml: 톰캣 설정 파일
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

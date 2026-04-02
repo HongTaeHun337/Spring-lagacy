@@ -1,0 +1,14 @@
+package com.test.java.di02;
+
+public class Service {
+	
+	private Employee employee;
+	
+	public void doSomething() {
+		
+		
+		
+		
+	}
+	
+}

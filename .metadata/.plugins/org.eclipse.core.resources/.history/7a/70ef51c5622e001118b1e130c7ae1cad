@@ -1,0 +1,36 @@
+package com.test.java.aop;
+
+public class MemoImpl implements Memo{
+
+	@Override
+	public void memo_add(String memo) {
+		
+		System.out.println("메모 쓰기 " + memo);
+		
+	}
+
+	@Override
+	public String read(String seq) throws Exception {
+		
+		if(seq.equals("1")) return "안녕하세요";
+		else if (seq.equals("2")) return "홍길동입니다.";
+		else if (seq.equals("3")) return "메모 테스트";
+		else throw new Exception("존재하지 않는 메모");
+		
+	}
+
+	@Override
+	public boolean edit(String seq, String memo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean del(String seq) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	
+}
