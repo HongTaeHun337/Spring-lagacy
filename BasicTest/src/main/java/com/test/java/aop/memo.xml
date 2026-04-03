@@ -51,8 +51,8 @@
                                 
             -->
             
-            <aop:pointcut expression="execution(public void com.test.java.aop.MemoImpl.add(String))" id="p1"/>
-            <aop:pointcut expression="execution(public String com.test.java.aop.MemoImpl.read(String))" id="p2"/>
+            <aop:pointcut expression="execution(public void com.test.java.aop.MemoImpl.addMemo(String))" id="p1"/>
+            <aop:pointcut expression="execution(public String com.test.java.aop.MemoImpl.readMemo(String))" id="p2"/>
             <aop:pointcut expression="execution(public boolean com.test.java.aop.MemoImpl.edit(String,String))" id="p3"/>
             <aop:pointcut expression="execution(public boolean com.test.java.aop.MemoImpl.del(String))" id="p4"/>
             
@@ -77,7 +77,9 @@
                 1. Before Advice
                 2. After Advice: 주업무 > 보조업무
                 3. Around Advice
+                
                 4. After-returning Advice
+                
                 5. After-throwing Advice
                 
             -->
@@ -99,8 +101,28 @@
             
             <!-- <aop:after method="log" pointcut-ref="p8" /> -->
             
-            <aop:after method="log" pointcut-ref="p9" />            
+            <!-- <aop:after method="log" pointcut-ref="p9" /> -->
             
+            <!-- add() + log() --> 
+            <!-- 주업무 > 보조업무 -->
+            <!-- <aop:after method="log" pointcut-ref="p1"/> -->
+                     
+            <!-- 보조업무 > 주업무 -->
+            <!-- <aop:before method="log" pointcut-ref="p1"/> -->
+            <!-- <aop:before method="test" pointcut-ref="p1"/> -->   
+            
+            <!-- 보조업무 > 주업무 > 보조업무 -->
+            <!-- <aop:around method="time" pointcut-ref="p1"/> -->
+            <!-- <aop:around method="time" pointcut-ref="p4"/> -->
+            
+            <!-- 주업무 > (반환값 전달) > 보조업무 -->
+			<!-- <aop:after-returning method="checkValid" pointcut-ref="p4" returning="result" /> -->    
+			<!-- <aop:after-returning method="checkValid" pointcut-ref="p2" returning="result" /> -->                               
+			
+			<!-- 주업무 > () > 보조업무 -->
+			<aop:after-throwing method="logException" pointcut-ref="p2" throwing="e" />
+			
+			                              
         </aop:aspect>
         
     </aop:config>

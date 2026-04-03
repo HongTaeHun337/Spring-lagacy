@@ -44,7 +44,7 @@ public class MemoImpl implements Memo{
 //		Logger logger = new Logger();
 //		logger.log();
 		
-		return true;
+		return false;
 	}
 
 	

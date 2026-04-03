@@ -1,59 +1,67 @@
-# 0402
-
-# 🍃 Spring Framework Core 개념 학습 (DI & AOP)
-
-## 📝 프로젝트 개요
-이 저장소는 Spring 프레임워크의 핵심인 **DI(의존성 주입)**와 **AOP(관점 지향 프로그래밍)**의 동작 원리를 이해하기 위해 작성된 실습 코드입니다.
-최신 어노테이션(Annotation) 방식 이전의 기초적인 **XML 기반(Legacy Spring) 설정 방법**을 직접 다루며, 스프링 컨테이너가 객체(Bean)를 어떻게 생성하고 관리하는지 깊이 있게 학습했습니다.
-
----
-
-## 📚 주요 학습 내용
-
-### 1. Spring Bean과 IoC 컨테이너 (`di03.xml`)
-* 자바에서 직접 `new` 키워드로 객체를 생성하는 대신, 스프링 컨테이너가 객체를 생성하고 관리하도록 위임(IoC, 제어의 역전).
-* `<bean class="..." id="...">` 태그를 사용하여 XML 파일에 빈(Bean)을 정의하고 선언하는 방법 학습.
-* **객체 생성 흐름:** XML 빈 정의 ➔ 스프링 컨테이너 생성 ➔ 빈(Bean) 생성 및 반환(`context.getBean()`)
-
-### 2. DI (Dependency Injection, 의존성 주입) (`di04.xml`)
-* 객체 간의 결합도를 낮추기 위해 스프링 컨테이너를 통해 의존성을 주입받는 방법 테스트.
-* **생성자 주입 (Constructor Injection):**
-  * `<constructor-arg ref="id">`를 사용하여 객체 생성 시점에 의존성 주입.
-* **수정자 주입 (Setter Injection):**
-  * `<property name="..." ref="...">`를 사용하여 `setter` 메서드를 통한 의존성 주입. (ex. `setEmployee()`)
-
-### 3. AOP (Aspect-Oriented Programming) (`memo.xml`)
-* 주 업무(Core Concern)와 보조 업무(Cross-cutting Concern, 예: 로그 출력)를 분리하여 모듈화.
-* **주요 구성 요소:**
-  * **Target:** 주 업무 객체 (`MemoImpl`)
-  * **Aspect:** 보조 업무 객체 (`Logger`)
-  * **Pointcut:** 보조 업무가 개입할 타겟의 특정 메서드를 지정. AspectJ 표현식 사용 (`execution()`)
-  * **Weaving:** 주 업무와 보조 업무가 결합되는 시점 정의 (`<aop:after>`)
-
----
-
-## 🐛 Trouble Shooting (문제 해결 경험)
-
-학습 과정에서 발생한 XML 및 AspectJ 문법 오류를 다음과 같이 디버깅하고 해결했습니다.
-
-**1. Pointcut 클래스명 오타로 인한 빈 생성 에러**
-* **증상:** `warning no match for this type name: com.test.java.aop.MemoInpl` 에러 발생.
-* **원인 및 해결:** XML 설정 파일 내 AspectJ 표현식에서 클래스명을 `MemoImpl`이 아닌 `MemoInpl`로 오타를 낸 것을 확인 후 수정함. 문자열 기반의 XML 설정이 가진 단점을 체감함.
-
-**2. AspectJ Pointcut 문법(띄어쓰기) 오류**
-* **증상:** `Pointcut is not well-formed: expecting 'name pattern'` 에러 발생.
-* **원인 및 해결:** `execution(*.addMemo(..))` 처럼 반환타입(`*`)과 클래스/메서드 지정 사이에 공백이 누락됨. `execution(* *.addMemo(..))`로 띄어쓰기를 추가하여 해결.
-
-**3. 다중 Pointcut 지정 시 XML 속성 문법 오류**
-* **증상:** `||` (OR) 연산자를 사용하여 여러 메서드에 AOP를 적용하려다 XML 파싱 에러 발생.
-* **원인 및 해결:** * ❌ `expression="execution(...)" || "execution(...)"` (잘못된 XML 속성 작성)
-  * ✅ `expression="execution(...) || execution(...)"` (하나의 문자열 안에 논리 연산자 포함)
-  * XML 태그 속성 문법에 맞게 하나의 쌍따옴표 안에 전체 표현식을 올바르게 묶어 해결함.
-
----
+# 🍃 Spring Framework & MVC 학습 일지
 
 ## 🛠️ Tech Stack
 * **Language:** Java
 * **Framework:** Spring Framework (Legacy)
-* **Configuration:** XML
+* **Configuration:** XML, Annotation
 * **IDE:** Eclipse / STS 3
+
+---
+
+## 🗓️ 2026-04-02: Spring Core 핵심 (XML 기반 DI & AOP)
+
+### 📝 개요
+Spring 프레임워크의 핵심인 **DI(의존성 주입)**와 **AOP(관점 지향 프로그래밍)**의 동작 원리를 학습했습니다. 최신 어노테이션 방식 이전의 기초적인 **XML 기반(Legacy Spring)** 설정 방식을 통해 스프링 컨테이너의 객체(Bean) 관리 메커니즘을 이해하는 데 중점을 두었습니다.
+
+### 📚 주요 학습 내용
+
+#### 1. Spring Bean과 IoC 컨테이너 (`di03.xml`)
+* **IoC (제어의 역전):** `new` 키워드를 통한 직접 객체 생성을 지양하고, 스프링 컨테이너에 객체 생성 및 관리를 위임.
+* **XML 설정:** `<bean class="..." id="...">` 태그를 사용하여 빈(Bean) 정의 및 선언.
+* **흐름:** XML 빈 정의 ➔ 스프링 컨테이너 생성 ➔ 빈 생성 및 반환 (`context.getBean()`).
+
+#### 2. DI (의존성 주입) (`di04.xml`)
+* 객체 간 결합도를 낮추기 위한 스프링 컨테이너의 의존성 주입 처리.
+* **생성자 주입 (Constructor Injection):** `<constructor-arg ref="id">`를 사용하여 객체 생성 시점에 의존성 주입.
+* **수정자 주입 (Setter Injection):** `<property name="..." ref="...">`를 사용하여 `setter` 메서드를 통해 의존성 주입.
+
+#### 3. AOP (관점 지향 프로그래밍) (`memo.xml`)
+* 주 업무(Core Concern)와 보조 업무(Cross-cutting Concern, 예: 로그 출력)의 모듈화 분리.
+* **주요 구성 요소:**
+  * **Target:** 주 업무를 수행하는 객체 (`MemoImpl`)
+  * **Aspect:** 보조 업무를 수행하는 객체 (`Logger`)
+  * **Pointcut:** 보조 업무가 개입할 타겟 메서드 지정 (AspectJ 표현식 `execution()` 사용)
+  * **Weaving:** 주 업무와 보조 업무가 결합되는 시점 정의 (`<aop:after>` 등)
+
+---
+
+## 🗓️ 2026-04-03: Spring MVC 문법 및 Annotation 기반 DI
+
+### 📝 개요
+기존 Servlet/JSP 기반의 웹 코드를 Spring MVC의 **어노테이션(Annotation)** 기반 코드로 전환하는 과정을 실습했습니다. 클라이언트 요청의 효율적인 수집, 컨트롤러의 다양한 응답 처리, 그리고 어노테이션을 활용한 계층 간 자동 의존성 주입(DI) 원리를 집중적으로 다루었습니다.
+
+### 📚 주요 학습 내용
+
+#### 1. 어노테이션 기반 DI 및 계층 구조
+기존 XML 설정에서 벗어나 Java 클래스에 어노테이션을 부여하여 스프링 빈으로 등록하고 객체를 조립하는 현대적인 방법.
+* **역할별 빈(Bean) 등록 (Component Scan):**
+  * `@Controller`: 웹 브라우저의 요청 처리 담당
+  * `@Service`: 핵심 비즈니스 로직 담당
+  * `@Repository`: DB 연결 및 접근(DAO) 담당
+* **`@Autowired` 활용:** 객체 내부에서 필요한 외부 객체를 직접 생성하지 않고, 생성자 주입 등을 통해 스프링 컨테이너가 만들어둔 빈을 자동 주입하여 결합도 최소화.
+* **데이터 흐름 아키텍처:** 클라이언트 요청 ➔ `Controller` ➔ `Service` ➔ `DAO` 순으로 안전하게 의존성이 연결되는 MVC 표준 계층 구조 구현.
+
+#### 2. 강력한 파라미터 수집 (Parameter Binding)
+과거 `request.getParameter()` 반복 사용을 대체하는 스프링의 데이터 자동 수집 및 형변환 기능.
+* **`@RequestParam`:** 파라미터를 변수에 1:1 매핑. 자동 형변환 지원 및 `defaultValue` 속성으로 초깃값 설정 가능.
+* **DTO 자동 수집 (Command Object):** 매개변수로 DTO 객체를 선언하면, HTML Form의 `name` 속성과 DTO의 필드명을 매칭하여 `Setter`를 통해 데이터를 자동 조립.
+* **배열 및 컬렉션 처리:** 동일한 이름의 여러 값(다중 체크박스 등)을 `String[]` 배열이나 `@RequestParam List<String>` 형태로 일괄 수집.
+* **`@ModelAttribute`:** 파라미터 수집과 동시에 `Model` 객체에 데이터를 담아 JSP로 전달하는 과정을 단일화.
+
+#### 3. 컨트롤러 반환 타입 (Return Types)
+비즈니스 로직 처리 후 화면이나 데이터를 클라이언트에게 반환하는 방식.
+* **`String`:** 반환된 문자열을 ViewResolver가 해석하여 해당 JSP 파일로 포워딩.
+* **`void`:** 반환값이 없을 경우, 요청된 URL 주소와 동일한 이름의 JSP 파일 자동 호출 (Spring 4.3+).
+* **`redirect:` / `forward:`:** 반환 문자열 앞 접두어를 통해 리다이렉트 및 포워딩 명시적 처리.
+* **`RedirectAttributes`:** 리다이렉트 시 쿼리스트링 하드코딩을 방지하고 객체를 통해 안전하게 파라미터 전달.
+* **`@ResponseBody` (JSON 반환):** ViewResolver를 거치지 않고, 반환하는 DTO 객체를 JSON 형식으로 변환하여 클라이언트에게 직접 응답.
