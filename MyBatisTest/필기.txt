@@ -1,0 +1,75 @@
+
+새 프로젝트
+- "MyBatisTest" > "com.test.mybatis"
+
+
+
+
+DB 작업
+- MyBatisTest > "script.sql"
+
+
+
+Java > DB 조작
+
+1. JDBC
+	- 기본
+	- 코드 반복 발생
+	- SQL 작성 불편 > 문자열
+	
+2. Spring JDBC
+	- 스프링 > JDBC 편하게
+
+3. MyBatis
+	- 영속성 계층
+	- JDBC > Wrapping > 편하게
+	- (***) XML 사용 > SQL 작성 
+	- (***) SQL Mapper Framework > SQL 결과를 객체로 '매핑'을 해준다.(***)
+
+4. JPA
+	- 영속성 계층
+	- DB 구조 > OOP 구조
+	- DB를 자바처럼 조작한다.
+	- ORM
+	
+	
+	
+
+패키지 & 파일
+- "com.test.mybatis.controller" > "MyBatisController.java"
+- "com.test.mybatis.model		> "MyBatisDao.java"
+								> "MyBatisDto.java"
+
+- views > "result.jsp"
+		> "list.jsp"
+		> "add.jsp"	
+		
+		
+MyBatis 설정하기
+1. 의존성
+
+2. 스프링 > MyBatis 설정
+	- root-context.xml
+			
+			
+			
+스프링 빈을 선언하는 어노테이션
+- 스프링 설정 파일(servlet-context.xml, root-context.xml) > component-scan
++
+1. @Component
+2. @Controller
+3. @Service
+4. @Repository
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

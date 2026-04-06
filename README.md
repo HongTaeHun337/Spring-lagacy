@@ -2,7 +2,8 @@
 
 ## 🛠️ Tech Stack
 * **Language:** Java
-* **Framework:** Spring Framework (Legacy)
+* **Framework:** Spring Framework (Legacy), MyBatis
+* **Test:** JUnit 4
 * **Configuration:** XML, Annotation
 * **IDE:** Eclipse / STS 3
 
@@ -65,3 +66,34 @@ Spring 프레임워크의 핵심인 **DI(의존성 주입)**와 **AOP(관점 지
 * **`redirect:` / `forward:`:** 반환 문자열 앞 접두어를 통해 리다이렉트 및 포워딩 명시적 처리.
 * **`RedirectAttributes`:** 리다이렉트 시 쿼리스트링 하드코딩을 방지하고 객체를 통해 안전하게 파라미터 전달.
 * **`@ResponseBody` (JSON 반환):** ViewResolver를 거치지 않고, 반환하는 DTO 객체를 JSON 형식으로 변환하여 클라이언트에게 직접 응답.
+
+---
+
+## 🗓️ 2026-04-06: MyBatis 연동 및 JUnit 단위 테스트
+
+### 📝 개요
+반복적이고 복잡한 순수 JDBC 코드를 혁신적으로 줄여주는 **MyBatis 프레임워크**를 스프링에 연동하는 방법을 학습했습니다. 또한, 서버(Tomcat)를 실행하지 않고도 백엔드 로직과 DB 쿼리를 독립적으로 검증할 수 있는 **JUnit 4** 기반의 단위 테스트(Unit Test) 환경 구축을 실습했습니다.
+
+### 📚 주요 학습 내용
+
+#### 1. MyBatis 프레임워크 연동 및 Mapper XML
+Java 코드 내부에 하드코딩되던 SQL을 분리하여 유지보수성을 극대화하는 매핑 기법을 학습했습니다.
+* **`SqlSessionTemplate`:** 기존 JDBC의 `Connection`, `PreparedStatement`, `ResultSet` 처리 및 예외 처리 구문을 완전히 대체하는 핵심 Bean 사용.
+* **XML Mapper 분리 (`address.xml`):** `<insert>`, `<update>`, `<select>` 태그를 이용하여 쿼리문만 별도의 XML 파일로 분리.
+* **데이터 입출력 매핑:**
+  * `parameterType`: Java에서 SQL로 데이터(String, HashMap, DTO 등)를 넘겨줄 때의 타입 지정 및 `#{변수명}` 문법 활용.
+  * `resultType`: SQL 실행 결과를 반환받을 Java 객체 지정 (MyBatis가 자동으로 DTO에 매핑).
+* **Type Alias (`mybatis-config.xml`):** 자주 사용하는 DTO의 긴 패키지 경로를 짧은 별칭(예: `adto`)으로 등록하여 XML 가독성 향상.
+
+#### 2. SQL 실행 결과에 따른 반환 타입 분기 (`MyBatisDao.java`)
+쿼리의 성격과 결과셋(ResultSet)의 형태에 따라 알맞은 템플릿 메서드를 선택하는 실습을 진행했습니다.
+* **단일 데이터 반환:** `template.selectOne()` (레코드 1개 또는 `count(*)` 같은 원자값)
+* **다중 데이터 반환:** `template.selectList()` (여러 레코드를 자동으로 `List<DTO>` 형태로 묶어서 반환)
+* **DML 실행:** `template.insert()`, `update()`, `delete()` (실행 결과로 영향을 받은 행의 개수 반환)
+
+#### 3. JUnit 4를 활용한 Spring 테스트 환경 구축
+웹 브라우저와 컨트롤러를 거치지 않고 DAO 객체와 DB 연결만 타겟팅하여 테스트하는 기법을 익혔습니다.
+* **Spring-JUnit 연동:** `@RunWith(SpringJUnit4ClassRunner.class)`와 `@ContextConfiguration`을 사용하여 테스트 클래스 실행 시 스프링 컨테이너를 구동하도록 설정.
+* **단위 테스트 어노테이션:** `@Test`로 개별 테스트 메서드를 지정하고, `@Ignore`로 특정 테스트를 일시적으로 제외.
+* **단언문(Assertion) 활용:** * `assertNotNull()`: DataSource나 템플릿 등 의존성이 정상적으로 주입되었는지(null이 아닌지) 검증.
+  * `assertEquals(expected, actual)`: DB 쿼리 실행 결과값(예: insert 성공 시 1 반환, 데이터 조회 시 일치 여부)이 예상과 맞는지 검증.

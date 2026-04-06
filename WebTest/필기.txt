@@ -65,7 +65,14 @@ Spring MVC Project > 스프링 설정 파일
 - "com.test.java.controller" > "Ex08Controller.java"	//사장(Main)
 - "com.test.java.service" 	 > "SpringService.java"		//팀장(Service)
 - "com.test.java.model" 	 > SpringDAO.java 			//팀원(Hong,Lee)
-- views > "ex08.jsp"									 
+- views > "ex08.jsp"		
+
+
+
+- "com.test.java.controller" > "Ex09Controller.java"	//사장(Main)
+- "com.test.java.service" 	 > "DIService.java"			//팀장(Service)
+- "com.test.java.model" 	 > "DIDAO.java" 			//팀원(Hong,Lee)
+- views > "ex09.jsp"											 
 	
 
 

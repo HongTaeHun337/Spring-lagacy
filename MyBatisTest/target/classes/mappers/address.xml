@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- src/main/resources > mappers > address.xml -->
+<!-- XML Mapper -->
+<mapper namespace="address">
+   
+   <!-- 
+   <insert id=""></insert>
+   <update id=""></update>
+   <delete id=""></delete>
+   <select id=""></select> 
+   -->
+   
+   <select id="time" resultType="String">
+   		select sysdate from dual
+   </select>
+   
+   <select id="m1">
+   		insert into tblAddress (seq, name, age, address, gender)
+   		values (seqAddress.nextval, '돼지',3,'서울시 강남구 대치동','m')
+   </select>
+   
+   <update id="m2" parameterType="String">
+   		update tblAddress set age = age + 1 where seq = #{seq}
+   </update>
+   
+   <update id="m3" parameterType="map">
+   		update tblAddress set
+   			name = #{name},
+   			age = #{age},
+   			address = #{address},
+   			gender = #{gender}
+   				where seq = #{seq}
+   </update>
+   
+   <update id="m4" parameterType="adto">
+   		update tblAddress set
+   			name = #{name},
+   			age = #{age},
+   			address = #{address},
+   			gender = #{gender}
+   				where seq = #{seq}
+   </update>
+
+   
+   <select id="m5" parameterType="String" resultType="String">
+   		select name from tblAddress where seq = #{seq}
+   </select>
+
+   
+   <select id="m6" parameterType="String" resultType="adto">
+   		select * from tblAddress where seq = #{seq}
+   </select>
+
+
+	<!-- 
+		template.selectList("m7") 
+		resultType > 레코드 1개를 담을 자료형 지정
+	-->
+	<select id="m7" resultType="String">
+		select name from tblAddress
+	</select>
+	
+	
+	<select id="m8" resultType="adto">
+		select * from tblAddress
+	</select>
+   
+   
+</mapper>
