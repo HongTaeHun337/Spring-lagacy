@@ -3,6 +3,7 @@ package com.test.mybatis.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -109,5 +110,65 @@ public class MyBatisDaoTest {
 		System.out.println(list);
 		
 	}
+	
+	@Test
+	public void testM10() {
+		
+		List<AddressDto> list = dao.m10(10);
+		
+		assertEquals(5, list.size());
+		
+	}
+	
+	@Test
+	public void testM11() {
+		
+		List<AddressDto> list = dao.m11("강남");
+		
+		assertEquals(3, list.size());
+	}
+	
+	@Test
+	public void testM12() {
+		
+		List<AddressDto> list = dao.m12("all");
+		
+		assertEquals(6, list.size());
+	}
+	
+	@Test
+	public void testM13() {
+		
+		AddressDto dto = new AddressDto();
+		dto.setAge("10");
+		dto.setGender("m");
+		
+		List<AddressDto> list = dao.m13(dto);
+		
+		//assertEquals(6, list.size());
+		System.out.println(list);
+	}
+	
+	@Test
+	public void testM14() {
+		
+		List<String> buseo = Arrays.asList("영업부", "총무부", "개발부");
+		
+		List<InsaDto> list = dao.m14(buseo);
+		
+		System.out.println(list);
+		
+	}
+	
+	@Test
+	public void testM16() {
+		
+		List<AddressPointDto> list = dao.m16();
+		
+		System.out.println(list);
+		
+	}
+	
+	
 	
 }

@@ -1,0 +1,27 @@
+새 프로젝트
+- "FileTest" > "com.test.file"
+
+Maven 프로젝트
+- pom.xml
+
+파일 업로드 설정
+1. 업로드 파일 저장 폴더
+	- webapp > resources > "files"
+2. web.xml
+	- 여러가지 설정
+3. servlet-context.xml
+	- 파일 업로드 빈
+	
+	
+	
+패키지 + 파일
+- "com.test.file.controller" > "FileController.java"
+- views > "ex01.jsp"	//폼
+		> "ex01ok.jsp" 	//다운로드
+	
+	
+	
+	
+	
+	
+	

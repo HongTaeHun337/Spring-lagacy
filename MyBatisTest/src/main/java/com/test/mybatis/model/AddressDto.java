@@ -15,4 +15,7 @@ public class AddressDto {
 	private String address;
 	private String gender;
 	
+	//- 1(tblAddress) : 1(tblPoint)
+	private PointDto pdto; //자식 객체
+	
 }
