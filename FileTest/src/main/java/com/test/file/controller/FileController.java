@@ -146,6 +146,7 @@ public class FileController {
 		
 	}
 	
+	
 	@GetMapping(value = "/download.do", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
 	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String filename, HttpServletRequest req) {
@@ -184,6 +185,76 @@ public class FileController {
 
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
+	
+	
+	@GetMapping(value = "/ex02.do")
+	public String ex02(Model model) {
+
+		return "ex02";
+	}
+	
+	@PostMapping(value = "/ex02ok.do")
+	public String ex02ok(Model model
+						, @RequestParam("txt") String txt
+						, MultipartFile[] attach) {
+		
+		String path = servletContext.getRealPath("/resources/files");
+		System.out.println(path);
+		
+		for (MultipartFile file : attach) {
+			
+			try {
+				
+				String filename = getUniqueFileName3(file.getOriginalFilename());
+				file.transferTo(new File(path + "\\" + filename));
+				
+			} catch (Exception e) {
+				System.out.println("FileController.ex02ok");
+				e.printStackTrace();
+			}
+
+		}
+		
+		model.addAttribute("txt", txt);
+		model.addAttribute("attach", attach);
+		
+		return "ex02ok";
+	}
+	
+	@GetMapping(value = "/ex03.do")
+	public String ex03(Model model) {
+
+		return "ex03";
+	}
+	
+	@PostMapping(value = "/ex03ok.do")
+	public String ex03ok(Model model
+						, @RequestParam("txt") String txt
+						, MultipartFile[] attach) {
+		
+		String path = servletContext.getRealPath("/resources/files");
+		System.out.println(path);
+		
+		for (MultipartFile file : attach) {
+			
+			try {
+				
+				String filename = getUniqueFileName3(file.getOriginalFilename());
+				file.transferTo(new File(path + "\\" + filename));
+				
+			} catch (Exception e) {
+				System.out.println("FileController.ex03ok");
+				e.printStackTrace();
+			}
+
+		}
+		
+		model.addAttribute("txt", txt);
+		model.addAttribute("attach", attach);
+		
+		return "ex03ok";
+	}
+	
 	
 }
 

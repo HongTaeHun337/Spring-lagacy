@@ -1,0 +1,61 @@
+새 프로젝트
+- "OpenApiTest" > "com.test.api"
+
+pom.xml
+- 이전 파일 복사
+
+web.xml
+- 인코딩 필터
+
+
+
+
+
+
+
+현재 프로젝트 + MyBatis 추가
+- pom.xml 
+- root-context.xml > HikariCP + DataSource + SqlSessionTemplate
+
+
+
+Open API
+- 개발자라면 누구나 사용할 수 있도록 공개(??)된 API
+- 서버(+기능 구현) > 네트워크(인터넷) > 내(+사용)
+
+
+패키지 + 파일
+- "com.test.api.naver" > "Ex01.java"
+
+- "com.test.api.controller" > "BookController.java"
+- "com.test.api.model" > "BookDao.java" 
+					   > "BookDto.java"
+- views > "list.jsp"		
+
+
+
+지도 API
+- 카카오맵, 네이버맵, 구글맵			   
+
+- "com.test.api.controller" > "MapController.java"
+- "com.test.model > "MapDao.java"
+				  > "MapDto.java"
+
+- views > "map01.jsp"
+		> "map02.jsp"
+		> "map03.jsp"
+		> "map04.jsp"
+
+
+
+
+
+
+
+
+
+
+
+
+
+

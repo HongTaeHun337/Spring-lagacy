@@ -4,4 +4,5 @@
 <aop-project name="MyBatisTest"/>
 <aop-project name="FileTest"/>
 <aop-project name="BasicTest"/>
+<aop-project name="OpenApiTest"/>
 </aop-reference-model>

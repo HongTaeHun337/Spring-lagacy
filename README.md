@@ -97,3 +97,30 @@ Spring 프레임워크의 핵심인 **DI(의존성 주입)**와 **AOP(관점 지
 * **1:1 관계 매핑:** `tblAddress`와 `tblPoint` 조인 결과를 매핑할 때, `<resultMap>` 내부에 `<association>` 태그를 사용하여 메인 DTO 안에 서브 DTO(`PointDto`)를 포함시켰습니다.
 * **1:N 관계 매핑:** 한 명의 직원이 참여한 여러 프로젝트 목록을 담기 위해 `InsaDto` 내부에 선언된 `List<ProjectDto>`를 `<collection>` 태그와 연결했습니다.
 * **컬럼 별칭(Alias) 해결:** 조인 시 발생하는 컬럼명 중복 문제를 SQL의 `AS` 구문으로 구분하고, 이를 `resultMap`의 `column` 속성과 일치시켜 정확히 매핑했습니다.
+
+
+## 🗓️ 2026-04-08: 고급 파일 처리 및 Open API 연동 (Naver, Kakao)
+
+### 📝 개요
+다중 파일 업로드 및 Drag & Drop 기반의 파일 드롭 UI를 구현했습니다. 또한 Naver 도서 검색 API로 JSON 데이터를 파싱하고, Kakao Map API를 연동하여 지도 제어 및 마커 데이터를 DB에 저장/불러오는 위치 기반 서비스를 실습했습니다.
+
+### 📚 주요 학습 내용
+
+#### 1. 고급 파일 업로드 (File Drop & 다중 파일)
+* **다중 파일 처리:** `MultipartFile[]` 배열을 통해 여러 개의 파일을 동시에 수신하고 저장하는 로직 구현.
+* **Drag & Drop UI:** jQuery의 `dragenter`, `dragover`, `drop` 이벤트를 제어하여 브라우저 기본 동작(`e.preventDefault()`)을 막고, 드래그한 파일을 `dataTransfer.files`로 가로채어 업로드하는 UI 구현.
+* **파일명 중복 방지:** `UUID.randomUUID()`와 `System.nanoTime()`을 활용하여 서버 내 첨부파일 덮어쓰기를 방지하는 절대 고유 파일명 생성 기법 적용.
+* **안전한 다운로드:** 브라우저(Trident, Edge 등) 별로 `User-Agent` 헤더를 분석하여 한글 파일명 깨짐 현상을 방지하는 `ResponseEntity` 기반 다운로드 구현.
+
+#### 2. Naver Open API 연동 및 JSON 파싱
+* **REST API 호출:** `HttpURLConnection`을 이용해 네이버 개발자 센터에서 발급받은 Client ID와 Secret을 HTTP 헤더에 담아 GET 요청 전송.
+* **JSON 파싱 (`json-simple`):** 응답받은 JSON 문자열을 `JSONParser`를 이용해 `JSONObject`와 `JSONArray`로 구문 분석하고, 이를 반복문을 통해 자바 `BookDto` 객체 리스트로 매핑.
+* **페이징(Paging) 처리:** 검색 결과의 `start` 파라미터를 자바스크립트로 동적 계산(이전/다음 버튼)하여 서버로 다시 전송(`submit()`)하는 도서 검색 페이징 로직 구현.
+
+#### 3. Kakao Map API 제어 및 DB 연동
+* **지도 기본 제어:** 발급받은 App Key를 이용해 지도를 렌더링하고, `kakao.maps.LatLng` 좌표계를 이용해 중심점 이동(`panTo`), 확대/축소(`setLevel`) 등 컨트롤 구현.
+* **마커(Marker) 및 이벤트:** 지도를 `click` 했을 때 사용자 정의 이미지(`MarkerImage`)를 씌운 마커와 `InfoWindow`(말풍선)를 동적으로 생성하는 이벤트 리스너 실습.
+* **마커 좌표 DB 연동 (Save & Load):**
+  * **저장:** 지도 클릭 시 생성된 위도(`lat`), 경도(`lng`)를 히든 폼에 담아 POST 전송 후 오라클 DB(`tblMarker`)에 `INSERT`.
+  * **조회:** DB에 저장된 모든 좌표를 `MapDto` 리스트로 불러와 `forEach` 문으로 지도 위에 다중 마커로 렌더링.
+* **보이는 영역 동적 계산:** `dragend`, `zoom_changed` 이벤트 발생 시 `map.getBounds()`의 남서/북동 좌표를 추출하여, 현재 모니터 화면(지도 영역) 안에 들어온 마커의 개수만 실시간으로 필터링 및 카운트하는 알고리즘 구현.

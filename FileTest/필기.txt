@@ -6,22 +6,40 @@ Maven 프로젝트
 
 파일 업로드 설정
 1. 업로드 파일 저장 폴더
-	- webapp > resources > "files"
+    - webapp > resources > "files"
 2. web.xml
-	- 여러가지 설정
+    - 여러가지 설정
 3. servlet-context.xml
-	- 파일 업로드 빈
-	
-	
-	
+    - 파일 업로드 빈
+        
+
+
 패키지 + 파일
 - "com.test.file.controller" > "FileController.java"
-- views > "ex01.jsp"	//폼
-		> "ex01ok.jsp" 	//다운로드
-	
-	
-	
-	
-	
-	
-	
+- views > "ex01.jsp"    //폼
+        > "ex01ok.jsp"  //다운로드
+        
+        > "ex02.jsp"
+        > "ex02ok.jsp"
+        
+        > "ex03.jsp"
+        > "ex03ok.jsp"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

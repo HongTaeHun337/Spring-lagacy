@@ -8,31 +8,32 @@
     <link rel="stylesheet" href="http://bit.ly/3WJ5ilK" />
 </head>
 <body>
-	<!--  -->
-	<h1>결과</h1>
-	
-	<div>
-		<div>txt: ${txt}</div>
-	</div>
-	
-	<div>
-		<div><a href="/file/resources/files/${filename}" download>filename: ${filename}</a></div>
-	</div>
-	
-	<div>
-		<div><a href="/file/download.do?filename=${filename}">filename:${filename}</a></div>
-	</div>
-	
-	<!--
-		- image/gif
-		- image/jpeg
-		- image/png
-	-->
-	<c:if test="${filetype.startsWith('image')}">
-	<div>
-		<img src="/file/resources/files/${filename}" style="max-whidth: 700px; border:1px solid gray; padding: 5px;">
-	</div>
-	</c:if>
+	<!-- ex01ok.jsp -->
+    <h1>결과</h1>
+    
+    <div>
+        <div>txt: ${txt}</div>
+    </div>
+    
+    <div>
+        <div><a href="/file/resources/files/${filename}" download>filename: ${filename}</a></div>
+    </div>
+    
+    <div>
+        <div><a href="/file/download.do?filename=${filename}">filename: ${filename}</a></div>
+    </div>
+    
+    <!--  
+        - image/gif
+        - image/jpeg
+        - image/png
+    -->
+    <c:if test="${filetype.startsWith('image')}">
+    <div>
+        <img src="/file/resources/files/${filename}" style="max-width: 700px; border: 1px solid gray; padding: 5px;">
+    </div>
+    </c:if>
+    
     
 	<script src="https://bit.ly/4cMuheh"></script>
     <script>
