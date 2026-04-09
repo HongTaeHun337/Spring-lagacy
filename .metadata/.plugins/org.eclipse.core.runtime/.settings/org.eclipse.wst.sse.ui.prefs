@@ -1,4 +1,10 @@
 content_assist_number_of_computers=26
+content_assist_parameters_background,defaultValueBeforeOverriddenFromCSS=255,255,255
+content_assist_parameters_foreground=169,183,198
+content_assist_parameters_foreground,defaultValueBeforeOverriddenFromCSS=0,0,0
+content_assist_proposals_background,defaultValueBeforeOverriddenFromCSS=255,255,255
+content_assist_proposals_foreground,defaultValueBeforeOverriddenFromCSS=0,0,0
 eclipse.preferences.version=1
+hoverModifiers=combinationHover|true|0;problemHover|false|0;documentationHover|false|0;annotationHover|true|Shift;
 useAnnotationsPrefPage=true
 useQuickDiffPrefPage=true

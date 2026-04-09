@@ -5,6 +5,8 @@ C:\code\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4146257906.
 \FileTest\src\main\java
 C:\code\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1355620759.index
 \BasicTest\src\main\java
+C:\code\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2753593782.index
+\AjaxTest\src\main\java
 C:\code\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\283949776.index
 \OpenApiTest\src\main\java
 C:\code\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3080424700.index

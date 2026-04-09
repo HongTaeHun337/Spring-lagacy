@@ -1,0 +1,56 @@
+새 프로젝트
+- "AjaxTest" > "com.test.ajax"
+
+pom.xml
+- 이전 파일 복사(> OpenApiTest)
+
+web.xml
+- 인코딩 필터(> OpenApiTest)
+
+MyBatis
+- root-context.xml > 빈 4개 (> OpenApiTest)
+- xml 3개 + properties > 복사 (> OpenApiTest)
+
+
+
+
+
+Ajax
+- Asynchronous JavaScript and XML
+- 비동기 자바스크립트 + XML
+- 자바스크립트를 사용해서 > 서버와 비동기 통신을 하는 기술 + 주고 받는 데이터 형식(XML)
+- 클라이언트(브라우저)와 서버(데이터서버)와 XML 형식의 데이터를 주고 받는 자바스크립트 비동기 통신 기법입니다.
+- XMLHttpRequest 객체(= ajax 객체) > 전화기 + 무전기 > 사용해서 통신
+
+
+Ajax 장,단점
+- 화면 깜빡임(새로고침)없이 서버와 데이터 통신이 가능하다.
+- 최소한의 필요한 데이터 송/수신을 한다. > 트래픽 감소 + 속도 빠름
+
+
+패키지 + 파일
+- "com.test.ajax.controller" > "AjaxController.java"
+- "com.test.ajax.model" > "AjaxDao.java"
+                        > "AddressDto.java"
+
+- views > "ex01.jsp"
+        > "ex02.jsp"
+        > "ex03.jsp"
+        > "ex04.jsp"
+        > "ex05.jsp"
+        > "ex06.jsp"
+        > "ex07.jsp"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
