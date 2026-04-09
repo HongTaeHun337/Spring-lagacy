@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="ImportExportAction">
-		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.ui.wizards.import.Preferences"/>
+		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.ui.wizards.import.ExternalProject"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
 		</list>
@@ -29,8 +29,9 @@
 		</list>
 	</section>
 	<section name="PreferencesImportWizard">
-		<item key="" value="C:\code\spring\eclipse_darcula.epf"/>
+		<item key="" value="C:\code\Spring-lagacy\eclipse_darcula.epf"/>
 		<list key="WizardPreferencesExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\code\Spring-lagacy\eclipse_darcula.epf"/>
 			<item value="C:\code\spring\eclipse_darcula.epf"/>
 			<item value="C:\code\spring\eclipse.epf"/>
 			<item value="C:\Users\user\Downloads\eclipse_darcula.epf"/>
