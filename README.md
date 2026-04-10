@@ -1,8 +1,9 @@
 # 🍃 Spring Framework & MyBatis 총정리 학습 일지
 
 ## 🛠️ Tech Stack
-* **Language:** Java
+* **Language:** Java, JavaScript (ES6), jQuery
 * **Framework:** Spring Framework (Legacy), MyBatis
+* **Open API:** Naver Search API, Kakao Map API
 * **Test:** JUnit 4
 * **Configuration:** XML, Annotation
 * **IDE:** Eclipse / STS 3
@@ -98,6 +99,7 @@ Spring 프레임워크의 핵심인 **DI(의존성 주입)**와 **AOP(관점 지
 * **1:N 관계 매핑:** 한 명의 직원이 참여한 여러 프로젝트 목록을 담기 위해 `InsaDto` 내부에 선언된 `List<ProjectDto>`를 `<collection>` 태그와 연결했습니다.
 * **컬럼 별칭(Alias) 해결:** 조인 시 발생하는 컬럼명 중복 문제를 SQL의 `AS` 구문으로 구분하고, 이를 `resultMap`의 `column` 속성과 일치시켜 정확히 매핑했습니다.
 
+---
 
 ## 🗓️ 2026-04-08: 고급 파일 처리 및 Open API 연동 (Naver, Kakao)
 
@@ -124,3 +126,55 @@ Spring 프레임워크의 핵심인 **DI(의존성 주입)**와 **AOP(관점 지
   * **저장:** 지도 클릭 시 생성된 위도(`lat`), 경도(`lng`)를 히든 폼에 담아 POST 전송 후 오라클 DB(`tblMarker`)에 `INSERT`.
   * **조회:** DB에 저장된 모든 좌표를 `MapDto` 리스트로 불러와 `forEach` 문으로 지도 위에 다중 마커로 렌더링.
 * **보이는 영역 동적 계산:** `dragend`, `zoom_changed` 이벤트 발생 시 `map.getBounds()`의 남서/북동 좌표를 추출하여, 현재 모니터 화면(지도 영역) 안에 들어온 마커의 개수만 실시간으로 필터링 및 카운트하는 알고리즘 구현.
+
+---
+
+## 🗓️ 2026-04-09: 비동기 통신 Ajax와 백엔드 연동
+
+### 📝 개요
+웹 페이지 전체를 새로고침하지 않고 필요한 데이터만 부분적으로 업데이트하는 **Ajax(Asynchronous JavaScript and XML)** 기술을 학습했습니다. 순수 자바스크립트(`XMLHttpRequest`) 방식부터 jQuery를 활용한 생산성 높은 구현, 그리고 스프링 백엔드에서 JSON 데이터를 응답하는 과정을 실습했습니다.
+
+### 📚 주요 학습 내용
+
+#### 1. Ajax의 핵심 원리와 비동기(Asynchronous) 방식
+* **동기(Sync) vs 비동기(Async):** 요청 후 응답이 올 때까지 기다리는 동기 방식과 달리, 비동기 방식은 배경(Background)에서 통신을 진행하여 사용자 경험을 끊김 없이 유지합니다.
+* **XMLHttpRequest 객체:** Ajax 통신의 핵심 객체로, `readyState`(통신 상태)와 `status`(HTTP 상태 코드)를 통해 데이터 수신 완료 여부를 판단합니다.
+
+#### 2. 스프링 백엔드 응답 처리 (`@ResponseBody`)
+* **데이터 직접 반환:** 컨트롤러 메서드에 `@ResponseBody`를 붙여 뷰(JSP) 경로가 아닌 **실제 데이터(문자열, 객체 등)**를 응답 본문에 직접 담아 반환합니다.
+* **JSON 자동 변환:** 리턴 타입을 `List<DTO>`와 같이 객체 형태로 지정하고 `produces` 속성을 설정하면, 스프링(Jackson 라이브러리 연동)이 이를 JSON 형식으로 자동 변환하여 클라이언트에게 전달합니다.
+* **한글 깨짐 방지:** 응답 시 `produces = "text/plain;charset=UTF-8"` 설정을 통해 텍스트 데이터의 한글 깨짐을 방지합니다.
+
+#### 3. 실전 Ajax 구현 (jQuery & MyBatis)
+* **jQuery `$.ajax()`:** 복잡한 순수 JS 코드를 단순화하여 `type`, `url`, `data`, `success` 등의 속성으로 가독성 있게 비동기 통신을 구현했습니다.
+* **아이디 중복 검사:** 사용자가 입력한 ID를 Ajax로 서버에 보내고, `AjaxDao`를 통해 DB 존재 여부를 확인한 뒤 결과를 화면에 즉각 출력하는 실무 로직을 작성했습니다.
+* **다중 데이터(JSON) 처리:** 서버에서 반환된 JSON 리스트를 자바스크립트의 `forEach` 문과 Template Literal(백틱)을 사용하여 동적으로 HTML 요소를 생성하고 화면에 렌더링했습니다.
+
+
+## 🗓️ 2026-04-10: RESTful API 구축, Swagger 명세서 및 심화 Ajax
+
+### 📝 개요
+웹 애플리케이션의 클라이언트(View)와 서버(API) 역할을 완벽하게 분리하는 **RESTful 아키텍처**를 실습했습니다. `@RestController`를 도입하여 CRUD API를 설계하고, 협업에 필수적인 **Swagger UI**를 연동하여 API 명세서를 자동화했습니다. 또한 다중 데이터(배열)를 Ajax로 전송하고 처리하는 심화 비동기 로직을 구현했습니다.
+
+### 📚 주요 학습 내용
+
+#### 1. RESTful API 컨트롤러 설계 (`@RestController`)
+* **데이터 전용 컨트롤러:** 기존 `@Controller` + `@ResponseBody` 조합을 대체하는 `@RestController`를 사용하여 모든 메서드가 JSON/Text 데이터를 직접 반환하도록 구현.
+* **HTTP Method 매핑:** REST 규약에 맞게 CRUD 작업을 명확히 분리.
+  * `C` (Create): `@PostMapping` (추가)
+  * `R` (Read): `@GetMapping` (조회)
+  * `U` (Update): `@PutMapping` (전체 수정)
+  * `D` (Delete): `@DeleteMapping` (삭제)
+* **경로 변수 (`@PathVariable`):** 쿼리스트링(`?seq=1`) 대신 URL 경로 자체를 데이터로 사용하는 `/address/{seq}` 방식을 적용하여 직관적인 URI 설계.
+
+#### 2. Swagger UI를 이용한 API 문서 자동화
+* **Springfox 의존성 추가:** Maven에 `springfox-swagger2` 및 `swagger-ui` 라이브러리를 추가하고, `SwaggerConfig` 클래스를 통해 빈(Bean) 등록.
+* **리소스 정적 매핑 해결:** 톰캣 404 에러 방지를 위해 `servlet-context.xml`에 `<mvc:resources mapping="/swagger-ui.html" ... />` 경로를 수동 매핑하는 트러블슈팅 경험.
+* **어노테이션 명세:** * `@Api`, `@ApiOperation`: 컨트롤러와 각 API 메서드의 용도 및 설명 작성.
+  * `@ApiModel`, `@ApiModelProperty`: 요청/응답에 사용되는 DTO 객체의 스키마와 예시 데이터를 문서화.
+
+#### 3. 심화 Ajax 통신 및 데이터 바인딩
+* **JSON 데이터 수신 (`@RequestBody`):** 클라이언트가 Ajax를 통해 `application/json` 포맷으로 보낸 데이터를 자바 객체(`AddressDto`)로 자동 바인딩.
+* **다중(배열) 데이터 처리:** 체크박스 등을 통해 선택된 여러 개의 식별자 번호를 `SeqDto` (String[] 배열)로 받아 MyBatis 동적 쿼리로 일괄 삭제(Delete All) 처리.
+* **클라이언트/서버 아키텍처 분리:** 화면(JSP)을 띄우는 `ClientController`와 순수하게 데이터(JSON)만 제공하는 `ServerController`를 물리적으로 분리하여 최신 프론트엔드(React, Vue 등)와의 협업 구조 모방 실습.
+* **무한 스크롤(더보기) 원리:** `index`(begin, end) 값을 파라미터로 넘겨 페이징된 데이터를 Ajax로 추가 로드(`more`)하는 로직 구현.

@@ -1,0 +1,145 @@
+새 프로젝트
+- "RestTest" > "com.test.rest"
+
+pom.xml
+- 이전 파일 복사(> AjaxTest)
+- jackson-databind 의존성 필수(***)
+
+web.xml
+- 인코딩 필터(> AjaxTest)
+
+MyBatis
+- root-context.xml > 빈 4개 (> AjaxTest)
+- xml 3개 + properties > 복사 (> AjaxTest)
+
+
+
+REST
+- REST, Representational State Transfer
+- 웹 상의 자원(문서, 이미지, 동영상, 데이터 등)의 위치를 자원명으로 표시해서 자원의 상태를 주고 받기 위한 행동 + 표현 > 규칙
+- 웹 상의 자원을 URI 자체로도 식별 가능하게 만들자(*****)
+- 표준안이 없다.
+
+- REST API or RESTful API
+
+
+URI(URL)을 만들 때 규칙
+- 회원 관리 > 각 기능의 URL 정의
+
+1. 기존 방식
+- URL > 주로 동사 + 명사를 사용
+    - 동사: 업무(행동) 표현
+    - 명서: 데이터 표현
+
+[메서드]      [URI]
+- GET         http://localhost:8080/member/list.do                목록보기
+- POST        http://localhost:8080/member/add.do                 추가하기
+- POST        http://localhost:8080/member/edit.do                수정하기
+- POST        http://localhost:8080/member/del.do                 삭제하기
+- GET         http://localhost:8080/member/list.do?word=검색어    검색하기
+
+
+2. REST 방식
+
+[메서드]      [URI]
+- GET         http://localhost:8080/member         목록보기(10명)
+- POST        http://localhost:8080/member         추가하기(1명)
+- PUT         http://localhost:8080/member/1       수정하기(1명)
+- DELETE      http://localhost:8080/member/1       삭제하기(1명)
+- GET         http://localhost:8080/member/검색어  검색하기
+
+
+HTML Form
+- <form method="">
+- GET, POST 만 지원
+
+
+REST API 설계 규칙
+1. URI에서 자원(명사)을 표시한다.(주로 URI의 마지막에 표현)
+2. URI에 동사를 표시하는 않는다.(무슨 행동을 하는지는 URI에 표현 안함)
+3. HTTP Method를 사용해서 행동을 표시한다.
+    a. GET:     서버로부터 리소스 요청
+    b. POST:    데이터를 서버에게 전달 + 서버측 생성
+    c. PUT:     데이터를 서버에게 전달 + 서버측 수정(전체 수정)
+    d. PATCH:   데이터를 서버에게 전달 + 서버측 수정(일부 수정)
+    e. DELETE:  데이터를 서버에게 전달 + 서버측 삭제
+    
+4. URI + HTTP Method = 완성
+
+5. 구분자는 '/'를 사용한다.
+6. URI의 마지막에 '/'를 적지 않는다.
+
+7. '-' > 권장(가독성)
+8. '_' > 비권장(가독성)
+9. 확장자를 사용하지 않는다.
+
+10. REST API의 요청 결과(반환값)는 순수 데이터만 반환한다.
+    - JSON, XML, Text
+    - HTML 반환(X)
+    - ajax용 서버로 사용
+    - REST 구현 > 클라이언트(브라우저, 모든 기기)
+
+
+
+업무
+- tblAddress > CRUD
+
+패키지 + 파일
+- "com.test.rest.controller" > "AddressController.java"
+- "com.test.rest.model" > "AddressDao.java"
+                        > "AddressDto.java"
+- views > 안 만든다.         
+
+
+
+
+REST API 개발 > 테스트용 클라이언트 도구
+
+1. 브라우저 > 부적합
+    - GET > 테스트 용이
+    - POST > 테스트 불편 > 테스트용 HTML 페이지 필요
+    - PUT/PATCH/DELETE > 테스트 불가 > <form method="GET/POST">
+    
+2. cmd > curl 명령어(프로그램) > 임시용
+
+3. 전문적인 REST Client Tools 사용
+    - Postman(*)
+    - Insomnia
+    - VS Code 확장(*)
+    - Swagger(***) > 테스트 작업 + 문서화
+    - 등등..
+               
+               
+               
+- Swagger
+- RESTful API를 설계, 빌드, 문서화 및 소비하는 과정을 돕는 오픈 소스 도구 세트
+- 의존성 추가 2개
+- servlet-context.xml
+
+
+브라우저
+- http://localhost:8080/rest/swagger-ui.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

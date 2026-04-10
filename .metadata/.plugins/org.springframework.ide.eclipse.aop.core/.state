@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
 <aop-project name="WebTest"/>
+<aop-project name="RestTest"/>
 <aop-project name="MyBatisTest"/>
+<aop-project name="AjaxTest"/>
 <aop-project name="FileTest"/>
-<aop-project name="BasicTest"/>
+<aop-project name="BasicTest">
+<aspect-definition advice-class-name="com.test.java.aop.Logger" advice-method-name="logException" advice-type="AFTER_THROWING" aspect-end-line-number="123" aspect-name="logger" aspect-start-line-number="123" factory-id="org.springframework.ide.eclipse.aop.core.beanAspectDefinitionElementFactory" file="/BasicTest/src/main/java/com/test/java/aop/memo.xml" pointcut-expression="execution(public String com.test.java.aop.MemoImpl.readMemo(String))" proxy-target-class="false" throwing="e">
+<aop-reference advice-type="AFTER_THROWING" bean="1:BeansModel|2:BasicTest|3:src/main/java/com/test/java/aop/memo.xml|7:beans:6|8:memo:14" bean-file="/BasicTest/src/main/java/com/test/java/aop/memo.xml" bean-start-line="14" factory-id="org.springframework.ide.eclipse.aop.core.aopReferenceElementFactory" file="/BasicTest/src/main/java/com/test/java/aop/memo.xml" source="=BasicTest/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.test.java.aop{Logger.java[Logger~logException~QException;" source-start-line="54" target="=BasicTest/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.test.java.aop{MemoImpl.java[MemoImpl~readMemo~QString;" target-start-line="17"/>
+</aspect-definition>
+</aop-project>
 <aop-project name="OpenApiTest"/>
 </aop-reference-model>

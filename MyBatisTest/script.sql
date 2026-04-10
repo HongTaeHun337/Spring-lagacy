@@ -112,4 +112,14 @@ insert into tblUser values ('cat','1111','고양이');
 commit ;
 
 select *
-from tblUser;
+from tblAddress;
+
+drop table tblProject;
+drop table tblPoint;
+
+
+
+
+select * from
+            (select a.*, rownum as rnum from
+                (select * from tblAddress order by seq desc) a);
