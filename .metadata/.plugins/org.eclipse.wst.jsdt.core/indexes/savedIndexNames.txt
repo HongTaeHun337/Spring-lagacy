@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INDEX VERSION 1.4+C:\code\spring\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
 3647410819.index
 1772527207.index
@@ -7,3 +8,17 @@ INDEX VERSION 1.4+C:\code\spring\.metadata\.plugins\org.eclipse.wst.jsdt.core\in
 4099825058.index
 113092399.index
 2753593782.index
+=======
+INDEX VERSION 1.4+C:\code\Spring-lagacy\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1772527207.index
+10605624.index
+1662736947.index
+1380678486.index
+4099825058.index
+1810986037.index
+113092399.index
+45098895.index
+2382015815.index
+3647410819.index
+3952938699.index
+>>>>>>> 676948dee94c7cb4a8ff132b5c435ad77678c6e7

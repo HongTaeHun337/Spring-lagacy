@@ -148,6 +148,7 @@ Spring 프레임워크의 핵심인 **DI(의존성 주입)**와 **AOP(관점 지
 #### 3. 실전 Ajax 구현 (jQuery & MyBatis)
 * **jQuery `$.ajax()`:** 복잡한 순수 JS 코드를 단순화하여 `type`, `url`, `data`, `success` 등의 속성으로 가독성 있게 비동기 통신을 구현했습니다.
 * **아이디 중복 검사:** 사용자가 입력한 ID를 Ajax로 서버에 보내고, `AjaxDao`를 통해 DB 존재 여부를 확인한 뒤 결과를 화면에 즉각 출력하는 실무 로직을 작성했습니다.
+<<<<<<< HEAD
 * **다중 데이터(JSON) 처리:** 서버에서 반환된 JSON 리스트를 자바스크립트의 `forEach` 문과 Template Literal(백틱)을 사용하여 동적으로 HTML 요소를 생성하고 화면에 렌더링했습니다.
 
 
@@ -178,3 +179,6 @@ Spring 프레임워크의 핵심인 **DI(의존성 주입)**와 **AOP(관점 지
 * **다중(배열) 데이터 처리:** 체크박스 등을 통해 선택된 여러 개의 식별자 번호를 `SeqDto` (String[] 배열)로 받아 MyBatis 동적 쿼리로 일괄 삭제(Delete All) 처리.
 * **클라이언트/서버 아키텍처 분리:** 화면(JSP)을 띄우는 `ClientController`와 순수하게 데이터(JSON)만 제공하는 `ServerController`를 물리적으로 분리하여 최신 프론트엔드(React, Vue 등)와의 협업 구조 모방 실습.
 * **무한 스크롤(더보기) 원리:** `index`(begin, end) 값을 파라미터로 넘겨 페이징된 데이터를 Ajax로 추가 로드(`more`)하는 로직 구현.
+=======
+* **다중 데이터(JSON) 처리:** 서버에서 반환된 JSON 리스트를 자바스크립트의 `forEach` 문과 Template Literal(백틱)을 사용하여 동적으로 HTML 요소를 생성하고 화면에 렌더링했습니다.
+>>>>>>> 676948dee94c7cb4a8ff132b5c435ad77678c6e7
