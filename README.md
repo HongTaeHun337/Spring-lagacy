@@ -148,7 +148,7 @@ Spring 프레임워크의 핵심인 **DI(의존성 주입)**와 **AOP(관점 지
 #### 3. 실전 Ajax 구현 (jQuery & MyBatis)
 * **jQuery `$.ajax()`:** 복잡한 순수 JS 코드를 단순화하여 `type`, `url`, `data`, `success` 등의 속성으로 가독성 있게 비동기 통신을 구현했습니다.
 * **아이디 중복 검사:** 사용자가 입력한 ID를 Ajax로 서버에 보내고, `AjaxDao`를 통해 DB 존재 여부를 확인한 뒤 결과를 화면에 즉각 출력하는 실무 로직을 작성했습니다.
-<<<<<<< HEAD
+
 * **다중 데이터(JSON) 처리:** 서버에서 반환된 JSON 리스트를 자바스크립트의 `forEach` 문과 Template Literal(백틱)을 사용하여 동적으로 HTML 요소를 생성하고 화면에 렌더링했습니다.
 
 
@@ -181,4 +181,36 @@ Spring 프레임워크의 핵심인 **DI(의존성 주입)**와 **AOP(관점 지
 * **무한 스크롤(더보기) 원리:** `index`(begin, end) 값을 파라미터로 넘겨 페이징된 데이터를 Ajax로 추가 로드(`more`)하는 로직 구현.
 =======
 * **다중 데이터(JSON) 처리:** 서버에서 반환된 JSON 리스트를 자바스크립트의 `forEach` 문과 Template Literal(백틱)을 사용하여 동적으로 HTML 요소를 생성하고 화면에 렌더링했습니다.
->>>>>>> 676948dee94c7cb4a8ff132b5c435ad77678c6e7
+
+
+## 🗓️ 2026-04-14: Spring Security 인증 및 인가 로직 구현
+
+### 📝 개요
+스프링 시큐리티(Spring Security)를 도입하여 웹 애플리케이션의 보안 기초를 설정하고, 인메모리(In-Memory) 인증에서 실제 데이터베이스(JDBC) 인증으로 확장하는 과정을 실습했습니다.
+
+### 📚 주요 학습 내용
+
+#### 1. 접근 권한 제어 (Authorization)
+* **URL 패턴별 권한 부여:** `security-context.xml`의 `<security:intercept-url>`을 사용하여 경로마다 접근 권한을 다르게 설정했습니다.
+  * `/index.do`: 모든 사용자 접근 허용 (`permitAll`)
+  * `/member.do`: 회원 권한 필요 (`hasRole('ROLE_MEMBER')`)
+  * `/admin.do`: 관리자 권한 필요 (`hasRole('ROLE_ADMIN')`)
+
+#### 2. 커스텀 로그인 및 로그아웃 (Authentication)
+* **커스텀 로그인 폼:** 시큐리티 기본 제공 폼 대신 사용자 정의 UI(`customlogin.jsp`)를 연결했습니다. 폼 전송 시 `action="/login"`과 `name="username"`, `name="password"` 규격을 맞추고 CSRF 토큰을 필수로 포함하여 정상 작동하도록 구현했습니다.
+* **로그아웃 처리:** `<security:logout>`을 통해 로그아웃 URL(`/customlogout.do`)을 지정하고, `invalidate-session="true"`로 세션을 완전히 날린 뒤 `logout-success-url`로 지정된 경로로 리다이렉트하는 과정을 확인했습니다.
+
+#### 3. 보안 핸들러 (Security Handlers) 구현
+* **권한 오류(403) 처리:** `AccessDeniedHandler` 인터페이스를 구현한 `CustomAccessDeniedHandler`를 만들어, 권한이 없는 페이지 접근 시 지정된 에러 페이지(`/accesserror.do`)로 보내도록 처리했습니다.
+* **로그인 성공 후속 조치:** `AuthenticationSuccessHandler`를 구현한 `CustomLoginSuccessHandler`를 작성했습니다. `HttpSessionRequestCache`를 활용하여 사용자가 로그인하기 직전에 가려고 했던 원래 목적지 URL을 기억해 두었다가 로그인 성공 시 해당 페이지로 다시 돌려보내는 로직을 구성했습니다.
+
+#### 4. 데이터베이스 연동 및 비밀번호 암호화 (BCrypt)
+* **JDBC 인증:** 초기 테스트용 인메모리 계정 설정을 걷어내고, `<security:jdbc-user-service>`를 사용해 오라클 DB(`dataSource`)와 시큐리티를 직접 연결했습니다.
+* **비밀번호 암호화:** 평문 저장을 막기 위해 `BCryptPasswordEncoder` 객체를 빈(Bean)으로 등록하여, 단방향 암호화 알고리즘이 적용된 안전한 비밀번호 대조 환경을 구축했습니다.
+
+#### 5. 트러블슈팅 (Troubleshooting)
+* **Bean 참조 대소문자 오류 해결:** `id="customAccessDeniedHandler"`로 생성한 빈을 `ref="Custom..."`처럼 대문자로 참조하여 발생한 `NoSuchBeanDefinitionException` 에러 원인 파악 및 수정 완료.
+* **Ambiguous Mapping 해결:** 여러 컨트롤러 메서드가 동일한 URL(`@GetMapping("/index.do")`)을 가리킬 때 톰캣 서버가 실행되지 않는 문제를 확인하고 라우팅 경로 분리 완료.
+* **SQL 컬럼명 오타 디버깅:** DB에 INSERT 쿼리 실행 시 `gender`를 `gneder`로 잘못 입력하여 발생한 오라클 `ORA-00904` (부적합한 식별자) 에러를 로그 분석을 통해 스스로 해결.
+
+

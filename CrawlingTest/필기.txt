@@ -1,0 +1,55 @@
+새 프로젝트
+- "CrawlingTest" > "com.test.java"
+
+크롤링(Crawling), 스크래핑(Scraping)
+- 특정 웹 사이트 페이지 > 탐색해서 내가 원하는 정보를 수집하는 행동
+- 웹 페이지 > 데이터 긁어오기
+
+
+다른 웹 사이트의 데이터를 가져오고 싶다면..
+1. 상대방이 나에게 DB 권한을 주면 > 가장 이상적인 방법 + 100% 불가능
+2. 상대방이 외부에 Open API 공개 > 제한적 + 무난한 방법(***)
+3. 웹 페이지의 소스를 긁어서 직접 원하는 데이터를 수집 > 크롤링
+
+
+크롤링 주의점!!
+- 저작권 문제
+- 정도껏~ > 긁어오는 작업 > 프로그램 > 속도 빠름 & 무제한 > 서버 입장 > 서버 비용 & 트래픽 증가
+
+
+크롤링 사전 지식
+- HTML, CSS, JavaScript 이해
+- Java
+
+
+프로젝트 설정
+- pom.xml
+
+
+패키지 + 파일
+- "com.test.java.crawl" > "Ex01.java"
+                        > "Ex02.java"
+                        > "Ex03.java"
+
+- "com.test.java.crawl.controller" > "CrawlController.java"
+- "com.test.java.crawl.model" > "MovieDao.java"
+                              > "MovieDto.java"
+
+- views > "movie.jsp"                              
+                        
+
+라이브러리
+- jsoup
+
+
+
+
+
+
+
+
+
+
+
+
+
